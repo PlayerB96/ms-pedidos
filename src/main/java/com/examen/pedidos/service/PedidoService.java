@@ -55,6 +55,24 @@ public class PedidoService {
     }
 
     @Transactional
+    public PedidoResponseDto actualizar(Long id, PedidoRequestDto dto) {
+        Pedido entity = buscarEntidad(id);
+        BigDecimal total = dto.getPrecioUnitario()
+                .multiply(BigDecimal.valueOf(dto.getCantidad()))
+                .setScale(2, RoundingMode.HALF_UP);
+
+        entity.setCliente(dto.getCliente());
+        entity.setCorreoCliente(dto.getCorreoCliente());
+        entity.setProductoId(dto.getProductoId());
+        entity.setNombreProducto(dto.getNombreProducto());
+        entity.setCantidad(dto.getCantidad());
+        entity.setPrecioUnitario(dto.getPrecioUnitario());
+        entity.setTotal(total);
+
+        return toResponse(pedidoRepository.save(entity));
+    }
+
+    @Transactional
     public PedidoResponseDto actualizarEstado(Long id, PedidoEstadoDto dto) {
         Pedido entity = buscarEntidad(id);
         entity.setEstado(dto.getEstado());

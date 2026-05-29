@@ -19,6 +19,7 @@ Microservicio REST para registrar y gestionar pedidos (Spring Boot, PostgreSQL/N
 | POST | `/api/pedidos` | Crear pedido (estado inicial `REGISTRADO`, total calculado) |
 | GET | `/api/pedidos` | Listar todos |
 | GET | `/api/pedidos/{id}` | Buscar por ID |
+| PUT | `/api/pedidos/{id}` | Actualizar pedido (total recalculado; no cambia estado ni fecha) |
 | PATCH | `/api/pedidos/{id}/estado` | Actualizar solo el estado |
 | DELETE | `/api/pedidos/{id}` | Cancelación lógica (`estado = CANCELADO`) |
 
